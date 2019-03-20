@@ -25,17 +25,22 @@ class Cell
     @ship.hit unless @ship == nil
   end
 
-  def render
-    if @fired_upon == false
-      p "."
-    elsif @fired_upon == true && @ship == nil
-      p "M"
-    elsif @fired_upon == true && @ship.sunk? == false
-      p "H"
-    elsif @fired_upon == true && @ship.sunk? == true
-      p "X"
+  def render(argument = false)
+    if argument == false
+      if @fired_upon    == false
+        p "."
+      elsif @fired_upon == true && @ship       == nil
+        p "M"
+      elsif @fired_upon == true && @ship.sunk? == false
+        p "H"
+      elsif @fired_upon == true && @ship.sunk? == true
+        p "X"
+      end
+    elsif argument == true
+      if @ship != nil
+        p "S"
+      end
     end
-
   end
 
 end
