@@ -7,8 +7,10 @@ require 'pry'
 class CellTest < Minitest::Test
 
   def setup
-    @cell = Cell.new("B4")
+    @cell    = Cell.new("B4")
     @cruiser = Ship.new("Cruiser", 3)
+    @cell_1  = Cell.new("B4")
+    @cell_2  = Cell.new("C3")
   end
 
   def test_it_exists
@@ -51,5 +53,30 @@ class CellTest < Minitest::Test
     assert_equal 2, @cell.ship.health
   end
 
+  def test_it_can_render_a_string_representation_of_itself
+    assert_equal ".", @cell_1.render
+
+    @cell_1.fire_upon
+    assert_equal "M", @cell_1.render
+
+    @cell_2.place_ship(@cruiser)
+    assert_equal ".", @cell_2.render
+
+    @cell_2.fire_upon
+    assert_equal "H", @cell_2.render
+
+    refute @cruiser.sunk?
+
+    @cruiser.hit
+    @cruiser.hit
+    assert @cruiser.sunk?
+
+    assert_equal "X", @cell_2.render  
+  end
+
+  def test_it_has_option_to_show_ship
+    @cell_2.place_ship(@cruiser)
+    assert_equal "S", @cell_2.render(true)
+  end
 
 end
