@@ -71,7 +71,7 @@ class CellTest < Minitest::Test
     @cruiser.hit
     assert @cruiser.sunk?
 
-    assert_equal "X", @cell_2.render  
+    assert_equal "X", @cell_2.render
   end
 
   def test_it_has_option_to_show_ship
