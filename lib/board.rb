@@ -51,8 +51,8 @@ class Board
       number_array = ship_coordinates.map do |ship_coordinate|
         ship_coordinate[1]
       end
-      number_array.each_cons(2).all? do |current_num, previous_num|
-          previous_num.to_i == current_num.to_i + 1
+      number_array.each_cons(2).all? do |current_num, next_num|
+          current_num.to_i == next_num.to_i - 1
       end
     end
   end
