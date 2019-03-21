@@ -47,6 +47,12 @@ class BoardTest < Minitest::Test
   end
 
   def test_if_ship_coordinates_are_in_same_row_and_adjacent
+    assert @board.same_row_and_adjacent(@cruiser, ["A2", "A3", "A4"])
+
+    assert @board.same_row_and_adjacent(@submarine, ["C2", "C3"])
+
+    assert @board.same_row_and_adjacent(@cruiser, ["B2", "B3", "B4"])
+
     refute @board.same_row_and_adjacent(@cruiser, ["A1", "A2", "A4"])
 
     refute @board.same_row_and_adjacent(@submarine, ["A1", "C1"])
@@ -54,21 +60,18 @@ class BoardTest < Minitest::Test
     refute @board.same_row_and_adjacent(@cruiser, ["A1", "A2", "B3"])
 
     refute @board.same_row_and_adjacent(@cruiser, ["B4", "B3", "B2"])
-
-    assert @board.same_row_and_adjacent(@cruiser, ["A2", "A3", "A4"])
-
-    assert @board.same_row_and_adjacent(@submarine, ["C2", "C3"])
-
-    assert @board.same_row_and_adjacent(@cruiser, ["B2", "B3", "B4"])
   end
 
-  def test_if_ship_coordinates_are_in_same_column
-    skip
-    assert_equal false, @board.coordinates_in_the_same_column(@cruiser, ["A1", "A2", "A4"])
+  def test_if_ship_coordinates_are_in_same_column_and_adjacent
+    assert @board.same_column_and_adjacent(@submarine, ["A1", "B1"])
 
-    assert_equal true, @board.coordinates_in_the_same_column(@submarine, ["A1", "C1"])
+    assert @board.same_column_and_adjacent(@submarine, ["C2", "D2"])
 
-    assert_equal false, @board.coordinates_in_the_same_column(@cruiser, ["A1", "C2", "B4"])
+    assert @board.same_column_and_adjacent(@cruiser, ["B1", "C1", "D1"])
+
+    refute @board.same_column_and_adjacent(@cruiser, ["A1", "B1", "C2"])
+
+    refute @board.same_column_and_adjacent(@submarine, ["B2", "C1"])
   end
 
   def test_if_coordinates_are_consecutive
