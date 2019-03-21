@@ -30,7 +30,11 @@ class Board
     @cells.include?(coordinate)
   end
 
-  def row_adjacency(ship, ship_coordinates)
+  def valid_ship_length?(ship, ship_coordinates)
+    ship.length == ship_coordinates.length
+  end
+
+  def coordinates_in_the_same_row(ship, ship_coordinates)
     # check that 1st character in string is the same
       #  if the same, 2nd character is sequentialr
     letter_array = ship_coordinates.map do |ship_coordinate|
@@ -39,7 +43,7 @@ class Board
     letter_array.uniq.count == 1
   end
 
-  def column_adjacency(ship, ship_coordinates)
+  def coordinates_in_the_same_column(ship, ship_coordinates)
     # check that 2nd characterin string is same
      # if the same, 1st is sequential
     number_array = ship_coordinates.map do |ship_coordinate|
@@ -49,8 +53,8 @@ class Board
   end
 
   def valid_placement?(ship, ship_coordinates)
-    # ship coordinates equal ship length
-    ship.length == ship_coordinates.length
+    # valid_coordinate?
+    valid_ship_length?
   end
 
 end
