@@ -33,14 +33,16 @@ class Board
   end
 
   def valid_placement?(ship, ship_coordinates)
-    valid_ship_length?
+    valid_ship_length?(ship, ship_coordinates)
+    same_row_and_adjacent?(ship, ship_coordinates)
+    same_column_and_adjacent?(ship, ship_coordinates)
   end
 
   def valid_ship_length?(ship, ship_coordinates)
     ship.length == ship_coordinates.length
   end
 
-  def same_row_and_adjacent(ship, ship_coordinates)
+  def same_row_and_adjacent?(ship, ship_coordinates)
     # check that 1st character in string is the same
       #  if the same, 2nd character is sequential
     letter_array = ship_coordinates.map do |ship_coordinate|
@@ -57,7 +59,7 @@ class Board
     end
   end
 
-  def same_column_and_adjacent(ship, ship_coordinates)
+  def same_column_and_adjacent?(ship, ship_coordinates)
     # check that 2nd character in string is the same
     #    if the same, 1st character is sequential
     number_array = ship_coordinates.map do |ship_coordinate|
