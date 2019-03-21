@@ -4,10 +4,10 @@ class Board
   attr_reader :cells
 
   def initialize
-    @cells = set_cells
+    @cells = new_cells
   end
 
-  def set_cells
+  def new_cells
     {
       "A1" => Cell.new("A1"),
       "A2" => Cell.new("A2"),
