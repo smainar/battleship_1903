@@ -57,30 +57,26 @@ class Board
     end
   end
 
-  def coordinates_in_the_same_column(ship, ship_coordinates)
-    # check that 2nd character in string is same
-     # if the same, 1st is sequential
+  def same_column_and_adjacent(ship, ship_coordinates)
+    # check that 2nd character in string is the same
+    #    if the same, 1st character is sequential
     number_array = ship_coordinates.map do |ship_coordinate|
       ship_coordinate[1]
     end
-    number_array.uniq.count == 1
+
+    if number_array.uniq.count == 1
+      letter_array = ship_coordinates.map do |ship_coordinate|
+        ship_coordinate[0]
+      end
+      letter_array.each_cons(2).all? do |current_letter, next_letter|
+          current_letter.ord == next_letter.ord - 1
+      end
+    end
   end
 
 end
 
     # ship coordinates are consecutive horizontally
-
     # ship coordinates are consecutive vertically
     # ship coordinates cannot be diagonal
-
     # board recognizes when it's a valid placement
-
-
-# letter_range = ("A".."D")
-# number_range = 1..4
-# letter_range.include?(coordinate[0]) && number_range.include?(coordinate[1].to_i)
-# letters are A-D
-# numbers are 1-4
-# letters are 1st element in string
-# numbers are 2nd element in string
-# check string is length of 2
