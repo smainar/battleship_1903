@@ -20,8 +20,6 @@ class BoardTest < Minitest::Test
     assert_instance_of Hash, @board.cells
 
     assert_equal 16, @board.cells.length
-
-    assert_instance_of Cell, @board.cells.values
   end
 
   def test_it_can_validate_single_coordinates_on_the_board
