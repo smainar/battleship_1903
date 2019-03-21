@@ -4,10 +4,10 @@ class Board
   attr_reader :cells
 
   def initialize
-    @cells = cells
+    @cells = new_cells
   end
 
-  def cells
+  def new_cells
     {
       "A1" => Cell.new("A1"),
       "A2" => Cell.new("A2"),
@@ -74,9 +74,13 @@ class Board
     end
   end
 
-end
+  def place(ship, ship_coordinates)
+    if valid_placement?(ship, ship_coordinates)
+      ship_coordinates.each do |coordinate|
+        @cells[coordinate].place_ship(ship)
+      end
+    end
 
-    # ship coordinates are consecutive horizontally
-    # ship coordinates are consecutive vertically
-    # ship coordinates cannot be diagonal
-    # board recognizes when it's a valid placement
+  end
+
+end
