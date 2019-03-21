@@ -33,9 +33,7 @@ class Board
   end
 
   def valid_placement?(ship, ship_coordinates)
-    valid_ship_length?(ship, ship_coordinates)
-    same_row_and_adjacent?(ship, ship_coordinates)
-    same_column_and_adjacent?(ship, ship_coordinates)
+    valid_ship_length?(ship, ship_coordinates) && same_row_and_adjacent?(ship, ship_coordinates) || same_column_and_adjacent?(ship, ship_coordinates)
   end
 
   def valid_ship_length?(ship, ship_coordinates)
