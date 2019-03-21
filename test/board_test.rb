@@ -47,53 +47,40 @@ class BoardTest < Minitest::Test
   end
 
   def test_if_ship_coordinates_are_in_same_row_and_adjacent
-    assert @board.same_row_and_adjacent(@cruiser, ["A2", "A3", "A4"])
+    assert @board.same_row_and_adjacent?(@cruiser, ["A2", "A3", "A4"])
 
-    assert @board.same_row_and_adjacent(@submarine, ["C2", "C3"])
+    assert @board.same_row_and_adjacent?(@submarine, ["C2", "C3"])
 
-    assert @board.same_row_and_adjacent(@cruiser, ["B2", "B3", "B4"])
+    assert @board.same_row_and_adjacent?(@cruiser, ["B2", "B3", "B4"])
 
-    refute @board.same_row_and_adjacent(@cruiser, ["A1", "A2", "A4"])
+    refute @board.same_row_and_adjacent?(@cruiser, ["A1", "A2", "A4"])
 
-    refute @board.same_row_and_adjacent(@submarine, ["A1", "C1"])
+    refute @board.same_row_and_adjacent?(@submarine, ["A1", "C1"])
 
-    refute @board.same_row_and_adjacent(@cruiser, ["A1", "A2", "B3"])
+    refute @board.same_row_and_adjacent?(@cruiser, ["A1", "A2", "B3"])
 
-    refute @board.same_row_and_adjacent(@cruiser, ["B4", "B3", "B2"])
+    refute @board.same_row_and_adjacent?(@cruiser, ["B4", "B3", "B2"])
   end
 
   def test_if_ship_coordinates_are_in_same_column_and_adjacent
-    assert @board.same_column_and_adjacent(@submarine, ["A1", "B1"])
+    assert @board.same_column_and_adjacent?(@submarine, ["A1", "B1"])
 
-    assert @board.same_column_and_adjacent(@submarine, ["C2", "D2"])
+    assert @board.same_column_and_adjacent?(@submarine, ["C2", "D2"])
 
-    assert @board.same_column_and_adjacent(@cruiser, ["B1", "C1", "D1"])
+    assert @board.same_column_and_adjacent?(@cruiser, ["B1", "C1", "D1"])
 
-    refute @board.same_column_and_adjacent(@cruiser, ["A1", "B1", "C2"])
+    refute @board.same_column_and_adjacent?(@cruiser, ["A1", "B1", "C2"])
 
-    refute @board.same_column_and_adjacent(@submarine, ["B2", "C1"])
-  end
-
-  def test_if_coordinates_are_consecutive
-    skip
-    refute @board.valid_placement?(@cruiser, ["A1", "A2", "A4"])
-
-    refute @board.valid_placement?(@submarine, ["A1", "C1"])
-
-    refute @board.valid_placement?(@cruiser, ["A3", "A2", "A1"])
-
-    refute @board.valid_placement?(@submarine, ["C1", "B1"])
+    refute @board.same_column_and_adjacent?(@submarine, ["B2", "C1"])
   end
 
   def test_that_coordinates_are_not_diagonal
-    skip
     refute @board.valid_placement?(@cruiser, ["A1", "B2", "C3"])
 
     refute @board.valid_placement?(@submarine, ["C2", "D3"])
   end
 
   def test_that_board_recognizes_valid_ship_placement
-    skip
     assert @board.valid_placement?(@submarine, ["A1", "A2"])
 
     assert @board.valid_placement?(@cruiser, ["B1", "C1", "D1"])
