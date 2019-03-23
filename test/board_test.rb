@@ -111,6 +111,7 @@ class BoardTest < Minitest::Test
 
   def test_board_can_render
     @board.place(@cruiser, ["A1", "A2", "A3"])
+
     expected =
           "  1 2 3 4 \n" +
           "A . . . . \n" +
@@ -122,7 +123,8 @@ class BoardTest < Minitest::Test
   end
 
  def test_board_can_render_with_hidden_ships
-   skip
+   @board.place(@cruiser, ["A1", "A2", "A3"])
+
    expected =
         "  1 2 3 4 \n" +
         "A S S S . \n" +
