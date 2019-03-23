@@ -33,14 +33,21 @@ class Board
   end
 
   def valid_placement?(ship, ship_coordinates)
-    valid_length    = valid_ship_length?(ship, ship_coordinates)
-    row_adjacent    = same_row_and_adjacent?(ship, ship_coordinates)
-    column_adjacent = same_column_and_adjacent?(ship, ship_coordinates)
-    valid_length && (row_adjacent || column_adjacent)
+    valid_length     = valid_ship_length?(ship, ship_coordinates)
+    no_overlap       = no_ship_overlap?(ship, ship_coordinates)
+    row_adjacent     = same_row_and_adjacent?(ship, ship_coordinates)
+    column_adjacent  = same_column_and_adjacent?(ship, ship_coordinates)
+    valid_length && no_overlap && (row_adjacent || column_adjacent)
   end
 
   def valid_ship_length?(ship, ship_coordinates)
     ship.length == ship_coordinates.length
+  end
+
+  def no_ship_overlap?(ship, ship_coordinates)
+    ship_coordinates.all? do |coordinate|
+      @cells[coordinate].empty?
+    end
   end
 
   def same_row_and_adjacent?(ship, ship_coordinates)
@@ -73,14 +80,6 @@ class Board
       end
       letter_array.each_cons(2).all? do |current_letter, next_letter|
           current_letter.ord == next_letter.ord - 1
-      end
-    end
-  end
-
-  def ship_overlap?(ship, ship_coordinates)
-    ship_coordinates.each do |coordinate|
-      if @cells[coordinate].ship != nil
-        return true
       end
     end
   end
