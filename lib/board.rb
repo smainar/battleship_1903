@@ -77,6 +77,14 @@ class Board
     end
   end
 
+  def ship_overlap?(ship, ship_coordinates)
+    ship_coordinates.each do |coordinate|
+      if @cells[coordinate].ship != nil
+        return true
+      end
+    end
+  end
+
   def place(ship, ship_coordinates)
     if valid_placement?(ship, ship_coordinates)
       ship_coordinates.each do |coordinate|
