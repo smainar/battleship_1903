@@ -92,7 +92,7 @@ class Board
     end
   end
 
-  def render(argument = false)
+  def render(show_hidden_ships = false)
     row_header = @cells.keys.map do |key|
       key[0]
     end.uniq
@@ -106,7 +106,7 @@ class Board
     row_header.each do |letter|
       body_string += "#{letter}"
       column_header.each do |number|
-        body_string += " #{@cells[letter + number].render}"
+        body_string += " #{@cells[letter + number].render(show_hidden_ships)}"
       end
       body_string += " \n"
     end
