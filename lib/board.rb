@@ -33,7 +33,10 @@ class Board
   end
 
   def valid_placement?(ship, ship_coordinates)
-    valid_ship_length?(ship, ship_coordinates) && same_row_and_adjacent?(ship, ship_coordinates) || same_column_and_adjacent?(ship, ship_coordinates)
+    valid_length    = valid_ship_length?(ship, ship_coordinates)
+    row_adjacent    = same_row_and_adjacent?(ship, ship_coordinates)
+    column_adjacent = same_column_and_adjacent?(ship, ship_coordinates)
+    valid_length && (row_adjacent || column_adjacent)
   end
 
   def valid_ship_length?(ship, ship_coordinates)
@@ -80,7 +83,6 @@ class Board
         @cells[coordinate].place_ship(ship)
       end
     end
-
   end
 
 end
