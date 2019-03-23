@@ -33,11 +33,21 @@ class Board
   end
 
   def valid_placement?(ship, ship_coordinates)
-    valid_ship_length?(ship, ship_coordinates) && same_row_and_adjacent?(ship, ship_coordinates) || same_column_and_adjacent?(ship, ship_coordinates)
+    valid_length     = valid_ship_length?(ship, ship_coordinates)
+    no_overlap       = no_ship_overlap?(ship, ship_coordinates)
+    row_adjacent     = same_row_and_adjacent?(ship, ship_coordinates)
+    column_adjacent  = same_column_and_adjacent?(ship, ship_coordinates)
+    valid_length && no_overlap && (row_adjacent || column_adjacent)
   end
 
   def valid_ship_length?(ship, ship_coordinates)
     ship.length == ship_coordinates.length
+  end
+
+  def no_ship_overlap?(ship, ship_coordinates)
+    ship_coordinates.all? do |coordinate|
+      @cells[coordinate].empty?
+    end
   end
 
   def same_row_and_adjacent?(ship, ship_coordinates)
@@ -80,7 +90,6 @@ class Board
         @cells[coordinate].place_ship(ship)
       end
     end
-
   end
 
 end
