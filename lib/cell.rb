@@ -28,7 +28,7 @@ class Cell
   def render(show_hidden_ships = false)
     if show_hidden_ships == true && @ship != nil && @fired_upon == false
       "S"
-    elsif @fired_upon == true && @ship       == nil
+    elsif @fired_upon == true && @ship       ren== nil
       "M"
     elsif @fired_upon == true && @ship.sunk? == false
       "H"
