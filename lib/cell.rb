@@ -31,7 +31,7 @@ class Cell
     elsif render == "H"
       "hit"
     elsif render == "X"
-      "success! Ship is sunk."
+      "success! #{@ship.name} is sunk."
     end
   end
 
