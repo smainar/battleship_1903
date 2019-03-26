@@ -7,8 +7,9 @@ class Game
   def initialize
       @computer_board = Board.new
       @player_board = Board.new
-      @computer = Computer.new(@computer_board, @ships)
-      @player = Player.new(@player_board)
+      @computer = Computer.new(@computer_board, @computer_ships)
+      @computer_ships = [cruiser_1 = Ship.new("Cruiser", 3), submarine_1 = Ship.new("Submarine", 2]
+      @player_ships = [cruiser_2 = Ship.new("Cruiser", 3), submarine_2= Ship.new("Submarine", 2]
     end
 
   def start
@@ -37,6 +38,7 @@ class Game
 
   def setup
     # Computer can place ships randomly in valid locations
+    @computer.place_ships
     # User can enter valid sequences to place both ships
     # p "I have laid out my ships on the grid."
     # p "You now need to lay out your two ships."
