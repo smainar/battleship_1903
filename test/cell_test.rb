@@ -53,6 +53,7 @@ class CellTest < Minitest::Test
     assert_equal 2, @cell.ship.health
   end
 
+
   def test_it_can_render_a_string_representation_of_itself
     assert_equal ".", @cell_1.render
 
@@ -78,6 +79,20 @@ class CellTest < Minitest::Test
     @cell_2.place_ship(@cruiser)
     assert_equal "S", @cell_2.render(true)
     assert_equal ".", @cell_1.render(true)
+  end
+
+  def test_it_can_display_results_of_shot
+    @cell_1.fire_upon
+    assert_equal "miss", @cell_1.display_results
+
+    @cell_2.place_ship(@cruiser)
+
+    @cell_2.fire_upon
+    assert_equal "hit", @cell_2.display_results
+
+    @cruiser.hit
+    @cruiser.hit
+    assert_equal "success! Ship is sunk.", @cell_2.display_results
   end
 
 end
