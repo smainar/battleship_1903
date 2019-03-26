@@ -21,9 +21,9 @@ class ComputerTest < MiniTest::Test
     assert_equal 2, @computer.ships.count
   end
 
-  def test_it_can_find_random_valid_coordinates_for_ships
-    assert_equal 3, @computer.find_random_coordinates(@cruiser).count
-    assert_equal 2, @computer.find_random_coordinates(@submarine).count
+  def test_it_can_validate_random_coordinates_for_ships
+    assert_equal 3, @computer.validate_random_coordinates(@cruiser).count
+    assert_equal 2, @computer.validate_random_coordinates(@submarine).count
   end
 
 end
