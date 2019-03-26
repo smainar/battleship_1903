@@ -23,7 +23,7 @@ class ComputerTest < MiniTest::Test
   end
 
   def test_by_default_it_has_an_array_of_16_targets_to_fire_upon
-    assert_equal 16, @computer.targets.count
+    assert_equal 16, @computer.possible_targets.count
   end
 
   def test_it_can_fire_16_times_at_unique_targets
@@ -31,7 +31,7 @@ class ComputerTest < MiniTest::Test
       @computer.fire_at_will(@computer.target)
     end
 
-    assert_empty @computer.targets
+    assert_empty @computer.possible_targets
   end
 
   def test_it_can_validate_random_coordinates_for_ships
