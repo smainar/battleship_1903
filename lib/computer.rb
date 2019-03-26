@@ -1,13 +1,13 @@
 class Computer
   attr_reader :board,
               :ships,
-              :targets
+              :possible_targets
 
   def initialize(computer_board, player_board, ships)
-    @computer_board = computer_board
-    @player_board   = player_board
-    @ships          = ships
-    @targets        = player_board.cells.keys.shuffle
+    @computer_board   = computer_board
+    @player_board     = player_board
+    @ships            = ships
+    @possible_targets = player_board.cells.keys.shuffle
   end
 
   def fire_at_will(target)
@@ -15,7 +15,7 @@ class Computer
   end
 
   def target
-    @targets.pop
+    @possible_targets.pop
   end
 
   def place_ships
