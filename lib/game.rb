@@ -14,7 +14,7 @@ class Game
 
   def start
     main_menu
-    setup
+    setup_game
     start_game
     end_game
   end
@@ -36,15 +36,27 @@ class Game
     end
   end
 
-  def setup
+  def setup_game
     # Computer can place ships randomly in valid locations
     @computer.place_ships
     # User can enter valid sequences to place both ships
-    # p "I have laid out my ships on the grid."
-    # p "You now need to lay out your two ships."
-    # p "The Cruiser is two units long and the Submarine is three units long."
-    # p "Enter the squares for the Cruiser (3 spaces):"
-    # Entering invalid ship placements prompts user to enter valid placements
+    p "I have laid out my ships on the grid."
+    p "You now need to lay out your two ships."
+    p "The Cruiser is two units long and the Submarine is three units long."
+
+    @player_ships.map do |ship|
+      p "Enter the coordinates for the #{ship.name} (#{ship.length} spaces): "
+      user_input = gets.chomp.upcase
+      user_input.split(" ").to_a
+
+      # Entering invalid ship placements prompts user to enter valid placements
+      while @player_board.valid_placement?(ship, user_input) == false
+        p "Invalid coordinates. Please try again."
+        user_input = gets.chomp.upcase
+        user_input.split(" ").to_a
+      end
+      @player_board.place(ship, user_input)
+    end
   end
 
   def start_game
