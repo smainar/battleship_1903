@@ -7,7 +7,7 @@ class Game
   def initialize
       @computer_board = Board.new
       @player_board = Board.new
-      @computer = Computer.new(@computer_board, @computer_ships)
+      @computer = Computer.new(@computer_board, @player_board, @computer_ships)
       @computer_ships = [cruiser_1 = Ship.new("Cruiser", 3), submarine_1 = Ship.new("Submarine", 2]
       @player_ships = [cruiser_2 = Ship.new("Cruiser", 3), submarine_2= Ship.new("Submarine", 2]
       @winner = nil
@@ -43,7 +43,7 @@ class Game
     # User can enter valid sequences to place both ships
     p "I have laid out my ships on the grid."
     p "You now need to lay out your two ships."
-    p "The Cruiser is two units long and the Submarine is three units long."
+    p "The Cruiser is three units long and the Submarine is two units long."
 
     @player_ships.map do |ship|
       p "Enter the coordinates for the #{ship.name} (#{ship.length} spaces): "
@@ -71,7 +71,7 @@ class Game
       p "=============COMPUTER BOARD============="
       @computer_board.render
       p "==============PLAYER BOARD=============="
-      @play_board.render(true)
+      @player_board.render(true)
 
       # Player choosing a coordinate to fire on
       p "Enter the coordinate for your shot: "
@@ -80,19 +80,17 @@ class Game
       while @computer_board.valid_coordinate?(user_input) == false
         p "Please enter a valid coordinate: "
       end
-      @computer_board.cells.fire_upon(user_input)
-
+      @computer_board.cells[user_input].fire_upon
 
       # Computer choosing a coordinate to fire on
-      @player_board.cells.fire_upon(coordinate)
+      current_target = @computer.fire_at_will(target)
 
       # Reporting the result of the Player’s shot
-      @computer_board.method_name
-      p "Your shot on #{user_input} was a #{result}."
+      @computer.player_board.some_method_name
+      p "Your shot on #{user_input} was a #{@computer_board.cells[user_input].display_results}."
       # Reporting the result of the Computer’s shot
 
-      p "My shot on #{computer_input} was a #{result}."
-      @player_board.method_name
+      p "My shot on #{current_target} was a #{@player_board.cells[current_target].display_results}."
     end
     # continue until there is a winner = all ships sunk
   end
