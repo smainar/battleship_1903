@@ -27,18 +27,28 @@ class Game
     user_input = gets.chomp.downcase
     print "\n"
 
-    # if user_input == "p"
-    #   setup_game
-    # elsif user_input == "q"
-    if user_input == "q"
-      exit!
-    end
-
-    until user_input == "p" || user_input == "q"
-      puts "Invalid response. Enter p to play, or q to quit: "
+    while user_input != "p"
+      if user_input == "q"
+        exit!
+      else
+        puts "Invalid response. Enter p to play, or q to quit:"
+      end
       user_input = gets.chomp.downcase
       print "\n"
     end
+
+    # # if user_input == "p"
+    # #   setup_game
+    # # elsif user_input == "q"
+    # if user_input == "q"
+    #   exit!
+    # end
+    #
+    # until user_input == "p" || user_input == "q"
+    #   puts "Invalid response. Enter p to play, or q to quit: "
+    #   user_input = gets.chomp.downcase
+    #   print "\n"
+    # end
   end
 
   def setup_game
