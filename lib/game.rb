@@ -5,12 +5,12 @@ require './lib/ship'
 
 class Game
   def initialize
-      @computer_board = Board.new
-      @player_board = Board.new
-      @computer = Computer.new(@computer_board, @player_board)
-      @player_ships = [Ship.new("Cruiser", 3), Ship.new("Submarine", 2)]
-      @winner = nil
-    end
+    @computer_board = Board.new
+    @player_board   = Board.new
+    @computer       = Computer.new(@computer_board, @player_board)
+    @player_ships   = [Ship.new("Cruiser", 3), Ship.new("Submarine", 2)]
+    @winner         = nil
+  end
 
   def start
     main_menu
@@ -20,20 +20,21 @@ class Game
   end
 
   def main_menu
-    puts "Welcome to BATTLESHIP"
-    puts "Enter p to play. Enter q to quit."
+    print "\n"
+    puts "~~~ Welcome to BATTLESHIP ~~~"
+    print "\n"
+    puts "Enter p to play. Enter q to quit:"
     user_input = gets.chomp.downcase
+    print "\n"
 
-    # if user_input == "p"
-    #   setup_game
-    # elsif user_input == "q"
-    if user_input == "q"
-      exit!
-    end
-
-    until user_input == "p" || user_input == "q"
-      puts "Invalid response. Enter p to play, or q to quit: "
+    while user_input != "p"
+      if user_input == "q"
+        exit!
+      else
+        puts "Invalid response. Enter p to play, or q to quit:"
+      end
       user_input = gets.chomp.downcase
+      print "\n"
     end
   end
 
@@ -41,22 +42,24 @@ class Game
     # Computer can place ships randomly in valid locations
     @computer.place_ships
     # User can enter valid sequences to place both ships
-    print "\n\n"
+    print "\n"
     puts "I have laid out my ships on the grid."
     puts "You now need to lay out your two ships."
     puts "The Cruiser is three units long and the Submarine is two units long."
-    print "\n\n"
+    print "\n"
 
     @player_ships.map do |ship|
       puts "Enter the coordinates for the #{ship.name} (#{ship.length} spaces): "
       user_input = gets.chomp.upcase
       user_input = user_input.split(" ")
+      print "\n"
 
       # Entering invalid ship placements prompts user to enter valid placements
       while @player_board.valid_placement?(ship, user_input) == false
         puts "Those are invalid coordinates. Please try again: "
         user_input = gets.chomp.upcase
         user_input = user_input.split(" ")
+        print "\n"
       end
       @player_board.place(ship, user_input)
     end
@@ -71,12 +74,10 @@ class Game
 
     # Displaying the boards
       print "\n\n"
-
       puts "=============COMPUTER BOARD============="
       print @computer_board.render(true)
 
       print "\n"
-
       puts "==============PLAYER BOARD=============="
       print @player_board.render(true)
 
@@ -85,6 +86,7 @@ class Game
       # Player choosing a coordinate to fire on
       puts "Enter the coordinate for your shot: "
       user_input = gets.chomp.upcase.to_s
+      print "\n"
 
       while @computer_board.valid_coordinate?(user_input) == false
         puts "Please enter a valid coordinate: "
