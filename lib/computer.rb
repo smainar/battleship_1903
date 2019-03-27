@@ -1,6 +1,7 @@
 class Computer
   attr_reader :board,
-              :possible_targets
+              :possible_targets,
+              :computer_ships
 
   def initialize(computer_board, player_board)
     @computer_board   = computer_board
