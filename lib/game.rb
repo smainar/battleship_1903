@@ -20,9 +20,12 @@ class Game
   end
 
   def main_menu
-    puts "Welcome to BATTLESHIP"
-    puts "Enter p to play. Enter q to quit."
+    print "\n"
+    puts "~~~ Welcome to BATTLESHIP ~~~"
+    print "\n"
+    puts "Enter p to play. Enter q to quit:"
     user_input = gets.chomp.downcase
+    print "\n"
 
     # if user_input == "p"
     #   setup_game
@@ -34,6 +37,7 @@ class Game
     until user_input == "p" || user_input == "q"
       puts "Invalid response. Enter p to play, or q to quit: "
       user_input = gets.chomp.downcase
+      print "\n"
     end
   end
 
@@ -41,22 +45,24 @@ class Game
     # Computer can place ships randomly in valid locations
     @computer.place_ships
     # User can enter valid sequences to place both ships
-    print "\n\n"
+    print "\n"
     puts "I have laid out my ships on the grid."
     puts "You now need to lay out your two ships."
     puts "The Cruiser is three units long and the Submarine is two units long."
-    print "\n\n"
+    print "\n"
 
     @player_ships.map do |ship|
       puts "Enter the coordinates for the #{ship.name} (#{ship.length} spaces): "
       user_input = gets.chomp.upcase
       user_input = user_input.split(" ")
+      print "\n"
 
       # Entering invalid ship placements prompts user to enter valid placements
       while @player_board.valid_placement?(ship, user_input) == false
         puts "Those are invalid coordinates. Please try again: "
         user_input = gets.chomp.upcase
         user_input = user_input.split(" ")
+        print "\n"
       end
       @player_board.place(ship, user_input)
     end
@@ -71,12 +77,10 @@ class Game
 
     # Displaying the boards
       print "\n\n"
-
       puts "=============COMPUTER BOARD============="
       print @computer_board.render(true)
 
       print "\n"
-
       puts "==============PLAYER BOARD=============="
       print @player_board.render(true)
 
@@ -85,6 +89,7 @@ class Game
       # Player choosing a coordinate to fire on
       puts "Enter the coordinate for your shot: "
       user_input = gets.chomp.upcase.to_s
+      print "\n"
 
       while @computer_board.valid_coordinate?(user_input) == false
         puts "Please enter a valid coordinate: "
