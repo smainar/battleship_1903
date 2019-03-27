@@ -60,6 +60,10 @@ class BoardTest < Minitest::Test
     refute @board.same_row_and_adjacent?(@cruiser, ["A1", "A2", "B3"])
 
     refute @board.same_row_and_adjacent?(@cruiser, ["B4", "B3", "B2"])
+
+    refute @board.same_row_and_adjacent?(@cruiser, ["A1", "A3", "A2"])
+
+    refute @board.same_row_and_adjacent?(@submarine, ["B2", "D4"])
   end
 
   def test_if_ship_coordinates_are_in_same_column_and_adjacent
