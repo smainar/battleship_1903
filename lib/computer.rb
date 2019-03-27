@@ -6,7 +6,7 @@ class Computer
   def initialize(computer_board, player_board, ships)
     @computer_board   = computer_board
     @player_board     = player_board
-    @ships            = ships
+    @computer_ships   = []
     @possible_targets = player_board.cells.keys.shuffle
   end
 
@@ -19,7 +19,7 @@ class Computer
   end
 
   def place_ships
-    @ships.each do |ship|
+    @computer_ships.each do |ship|
       ship_coordinates = validate_random_coordinates(ship)
       @computer_board.place(ship, ship_coordinates)
     end
