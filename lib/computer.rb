@@ -1,12 +1,11 @@
 class Computer
   attr_reader :board,
-              :ships,
               :possible_targets
 
-  def initialize(computer_board, player_board, ships)
+  def initialize(computer_board, player_board)
     @computer_board   = computer_board
     @player_board     = player_board
-    @computer_ships   = []
+    @computer_ships   = [Ship.new("Cruiser", 3), Ship.new("Submarine", 2)]
     @possible_targets = player_board.cells.keys.shuffle
   end
 
