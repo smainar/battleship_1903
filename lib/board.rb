@@ -33,6 +33,10 @@ class Board
   end
 
   def valid_placement?(ship, ship_coordinates)
+    ship_coordinates.each do |coordinate|
+      return false if valid_coordinate?(coordinate) == false
+    end
+
     valid_length     = valid_ship_length?(ship, ship_coordinates)
     no_overlap       = no_ship_overlap?(ship, ship_coordinates)
     row_adjacent     = same_row_and_adjacent?(ship, ship_coordinates)
@@ -64,6 +68,8 @@ class Board
       number_array.each_cons(2).all? do |current_num, next_num|
           current_num.to_i == next_num.to_i - 1
       end
+    else
+      false
     end
   end
 
@@ -81,6 +87,8 @@ class Board
       letter_array.each_cons(2).all? do |current_letter, next_letter|
           current_letter.ord == next_letter.ord - 1
       end
+    else
+      false
     end
   end
 
@@ -92,7 +100,7 @@ class Board
     end
   end
 
-  def render(show_hidden_ships = false)
+  def render(unveil_ships = false)
     row_header = @cells.keys.map do |key|
       key[0]
     end.uniq
@@ -101,16 +109,16 @@ class Board
       key[1]
     end.uniq
 
-    body_string = "  #{column_header.join(" ")} \n"
+    render_board = "  #{column_header.join(" ")} \n"
 
     row_header.each do |letter|
-      body_string += "#{letter}"
+      render_board += "#{letter}"
       column_header.each do |number|
-        body_string += " #{@cells[letter + number].render(show_hidden_ships)}"
+        render_board += " #{@cells[letter + number].render(unveil_ships)}"
       end
-      body_string += " \n"
+      render_board += " \n"
     end
-    body_string
+    render_board
   end
 
 end
