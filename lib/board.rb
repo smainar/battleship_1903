@@ -23,7 +23,7 @@ class Board
       "D2" => Cell.new("D2"),
       "D3" => Cell.new("D3"),
       "D4" => Cell.new("D4")
-    }
+     }
   end
 
   def valid_coordinate?(coordinate)
@@ -53,8 +53,6 @@ class Board
   end
 
   def same_row_and_adjacent?(ship, ship_coordinates)
-    # check that 1st character in string is the same
-      #  if the same, 2nd character is sequential
     letter_array = ship_coordinates.map do |ship_coordinate|
       ship_coordinate[0]
     end
@@ -63,6 +61,7 @@ class Board
       number_array = ship_coordinates.map do |ship_coordinate|
         ship_coordinate[1]
       end
+
       number_array.each_cons(2).all? do |current_num, next_num|
           current_num.to_i == next_num.to_i - 1
       end
@@ -72,8 +71,6 @@ class Board
   end
 
   def same_column_and_adjacent?(ship, ship_coordinates)
-    # check that 2nd character in string is the same
-    #    if the same, 1st character is sequential
     number_array = ship_coordinates.map do |ship_coordinate|
       ship_coordinate[1]
     end
@@ -82,6 +79,7 @@ class Board
       letter_array = ship_coordinates.map do |ship_coordinate|
         ship_coordinate[0]
       end
+
       letter_array.each_cons(2).all? do |current_letter, next_letter|
           current_letter.ord == next_letter.ord - 1
       end
