@@ -5,12 +5,12 @@ require './lib/ship'
 
 class Game
   def initialize
-      @computer_board = Board.new
-      @player_board = Board.new
-      @computer = Computer.new(@computer_board, @player_board)
-      @player_ships = [Ship.new("Cruiser", 3), Ship.new("Submarine", 2)]
-      @winner = nil
-    end
+    @computer_board = Board.new
+    @player_board   = Board.new
+    @computer       = Computer.new(@computer_board, @player_board)
+    @player_ships   = [Ship.new("Cruiser", 3), Ship.new("Submarine", 2)]
+    @winner         = nil
+  end
 
   def start
     main_menu
