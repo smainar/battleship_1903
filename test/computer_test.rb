@@ -19,7 +19,6 @@ class ComputerTest < MiniTest::Test
 
   def test_by_default_it_has_two_ships
     assert_equal [@cruiser, @submarine], @computer.ships
-    assert_equal 2, @computer.ships.count
   end
 
   def test_by_default_it_has_an_array_of_16_targets_to_fire_upon
@@ -34,8 +33,9 @@ class ComputerTest < MiniTest::Test
     assert_empty @computer.possible_targets
   end
 
-  def test_it_can_validate_random_coordinates_for_ships
+  def test_it_can_return_ship_coordinates_that_pass_placement_validation
     assert_equal 3, @computer.validate_random_coordinates(@cruiser).count
+
     assert_equal 2, @computer.validate_random_coordinates(@submarine).count
   end
 
