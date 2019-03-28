@@ -76,14 +76,21 @@ class Game
       print "\n"
 
       puts "Enter the coordinate for your shot:"
-      user_input = gets.chomp.upcase.to_s
+      user_input = gets.chomp.upcase
       print "\n"
 
-      while @computer_board.valid_coordinate?(user_input) == false
+      until @computer_board.valid_coordinate?(user_input)
         puts "Please enter a valid coordinate:"
-        user_input = gets.chomp.upcase.to_s
+        user_input = gets.chomp.upcase
         print "\n"
       end
+
+      while @computer_board.cells[user_input]&.fired_upon? || user_input == ""
+        puts "You have already fired upon that cell! Choose again:"
+        user_input = gets.chomp.upcase
+        print "\n"
+      end
+
       @computer_board.cells[user_input].fire_upon
 
       current_target = @computer.target
