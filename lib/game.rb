@@ -5,11 +5,11 @@ require './lib/ship'
 
 class Game
   def initialize
-    @computer_board = Board.new
-    @player_board   = Board.new
-    @computer       = Computer.new(@computer_board, @player_board)
-    @player_ships   = [Ship.new("Cruiser", 3), Ship.new("Submarine", 2)]
-    @winner         = nil
+    @computer_board  = Board.new
+    @player_board    = Board.new
+    @computer        = Computer.new(@computer_board, @player_board)
+    @player_ships    = [Ship.new("Cruiser", 3), Ship.new("Submarine", 2)]
+    @winner          = nil
   end
 
   def start
@@ -68,22 +68,29 @@ class Game
 
       print "\n"
       puts "=============COMPUTER BOARD============="
-      print @computer_board.render(true)
+      print @computer_board.render
       print "\n"
 
       puts "==============PLAYER BOARD=============="
       print @player_board.render(true)
       print "\n"
 
-      puts "Enter the coordinate for your shot:"
-      user_input = gets.chomp.upcase.to_s
-      print "\n"
-
-      while @computer_board.valid_coordinate?(user_input) == false
-        puts "Please enter a valid coordinate:"
-        user_input = gets.chomp.upcase.to_s
+      successful_shot = false
+      puts "Enter a coordinate for your shot:"
+      until successful_shot == true
+        user_input = gets.chomp.upcase
         print "\n"
+        if @computer_board.valid_coordinate?(user_input)
+          if @computer_board.cells[user_input].fired_upon? == false
+            successful_shot = true
+          elsif @computer_board.cells[user_input].fired_upon?
+            puts "You have already fired upon that cell! Choose again:"
+          end
+        else
+          puts "Please enter a valid coordinate:"
+        end
       end
+
       @computer_board.cells[user_input].fire_upon
 
       current_target = @computer.target
