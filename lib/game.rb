@@ -68,7 +68,7 @@ class Game
 
       print "\n"
       puts "=============COMPUTER BOARD============="
-      print @computer_board.render(true)
+      print @computer_board.render
       print "\n"
 
       puts "==============PLAYER BOARD=============="
